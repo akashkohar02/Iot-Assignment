@@ -1,0 +1,26 @@
+<loading-spinner *ngIf="isLoading" class="loading"></loading-spinner>
+<section>
+<h2>Flicker Table</h2>
+<input type="text" placeholder="Search here" (input)="searchData(searchValue.value)" #searchValue> 
+<div class="search-results" 
+infinite-scroll 
+(scrolled)="loadMoreData()" >
+<table class="mb-7">
+  <tr>
+    <th>Index</th>
+    <th>Image</th>
+   
+    <th>title</th>
+  </tr>
+  <tr *ngIf="photoData.photo.length == 0" >
+    <td colspan="3" class="text-center">No Data</td></tr>
+  <tr *ngFor="let data of photoData.photo; let i = index">
+    <td>{{i+1}}</td>
+    <td>
+      <img style="height: 100px; width: 100px;" src="https://live.staticflickr.com/{{data.server}}/{{data.id + '_'+ data.secret}}.jpg" 
+      onerror="this.src='../../../../assets/default.jfif';"/>
+    </td>
+    <td>{{data.title}}</td>
+</table>
+</div>
+</section>
